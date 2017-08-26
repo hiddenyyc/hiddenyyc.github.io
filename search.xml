@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+    
+    <entry>
+      <title><![CDATA[htop使用详解]]></title>
+      <url>/2017/08/26/htop%E4%BD%BF%E7%94%A8%E8%AF%A6%E8%A7%A3/</url>
+      <content type="html"><![CDATA[<h3 id="htop使用详解"><a href="#htop使用详解" class="headerlink" title="htop使用详解"></a><center>htop使用详解</center></h3><h3 id="一-Htop使用简介"><a href="#一-Htop使用简介" class="headerlink" title="一.Htop使用简介"></a>一.Htop使用简介</h3><h3 id="大家可能对top监控软件比较熟悉，今天我为大家介绍另外一个监控软件Htop，姑且称之为top的增强版，相比top其有着很多自身的优势。如下："><a href="#大家可能对top监控软件比较熟悉，今天我为大家介绍另外一个监控软件Htop，姑且称之为top的增强版，相比top其有着很多自身的优势。如下：" class="headerlink" title="大家可能对top监控软件比较熟悉，今天我为大家介绍另外一个监控软件Htop，姑且称之为top的增强版，相比top其有着很多自身的优势。如下："></a>大家可能对top监控软件比较熟悉，今天我为大家介绍另外一个监控软件Htop，姑且称之为top的增强版，相比top其有着很多自身的优势。如下：</h3><ul>
+<li>两者相比起来，top比较繁琐</li>
+<li>默认支持图形界面的鼠标操作</li>
+<li>可以横向或纵向滚动浏览进程列表，以便看到所有的进程和完整的命令行</li>
+<li>杀进程时不需要输入进程号等</li>
+</ul>
+<h3 id="二-安装Htop-操作环境：CentOS-7-3-64位"><a href="#二-安装Htop-操作环境：CentOS-7-3-64位" class="headerlink" title="二.安装Htop(操作环境：CentOS 7.3(64位))"></a>二.安装Htop(操作环境：CentOS 7.3(64位))</h3><h5 id="注意因为改了yum源，base源没有htop包，得添加个epel源-以下是我yum源配置信息"><a href="#注意因为改了yum源，base源没有htop包，得添加个epel源-以下是我yum源配置信息" class="headerlink" title="注意因为改了yum源，base源没有htop包，得添加个epel源,以下是我yum源配置信息"></a>注意因为改了yum源，base源没有htop包，得添加个epel源,以下是我yum源配置信息</h5><pre><code class="bash">vim /etc/yum.repos.d/yyc.repo
+[yyc]
+name=yyc
+baseurl=http://xxx.xxx.xxx.xxx/centos/7
+gpgcheck=0
+
+[epe]
+name=epe
+baseurl=http://xxx.xxx.xxx.xxx/fedora-epel/7/x86_64/
+gpgcheck=0
+</code></pre>
+<h5 id="安装："><a href="#安装：" class="headerlink" title="安装："></a>安装：</h5><pre><code class="bash">[ root@localhost ~ ]#yum -y install htop
+</code></pre>
+<p><img src="http://otjfxmx8m.bkt.clouddn.com/B72FAC7D-9223-487E-A50E-BE673929BA8F.png" alt="image"></p>
+<h4 id="图上最左上方分别为：cpu、内存、交换分区的使用情况，最右上角分别为：Tasks为进程总数，当前运行的进程数、Load-average为系统1分钟、5分钟、10分钟的平均负载情况、Uptime为系统的运行时间"><a href="#图上最左上方分别为：cpu、内存、交换分区的使用情况，最右上角分别为：Tasks为进程总数，当前运行的进程数、Load-average为系统1分钟、5分钟、10分钟的平均负载情况、Uptime为系统的运行时间" class="headerlink" title="图上最左上方分别为：cpu、内存、交换分区的使用情况，最右上角分别为：Tasks为进程总数，当前运行的进程数、Load average为系统1分钟、5分钟、10分钟的平均负载情况、Uptime为系统的运行时间"></a>图上最左上方分别为：cpu、内存、交换分区的使用情况，最右上角分别为：Tasks为进程总数，当前运行的进程数、Load average为系统1分钟、5分钟、10分钟的平均负载情况、Uptime为系统的运行时间</h4><p><img src="http://otjfxmx8m.bkt.clouddn.com/E6F802A1-903E-47E8-AE4A-3C5BA77CC61B.png" alt="image"></p>
+<h5 id="图中选项："><a href="#图中选项：" class="headerlink" title="图中选项："></a>图中选项：</h5><ul>
+<li>PID：进行的标识号</li>
+<li>USER：运行此进程的用户</li>
+<li>PRI：进程的优先级</li>
+<li>NI：进程的优先级别值，默认的为0，可以进行调整</li>
+<li>VIRT：进程占用的虚拟内存值</li>
+<li>RES：进程占用的物理内存值</li>
+<li>SHR：进程占用的共享内存值</li>
+<li>S：进程的运行状况，R表示正在运行、S表示休眠，等待唤醒、Z表示僵死状态</li>
+<li>%CPU：该进程占用的CPU使用率</li>
+<li>%MEM：该进程占用的物理内存和总内存的百分比</li>
+<li>TIME+：该进程启动后占用的总的CPU时间</li>
+<li>COMMAND：进程启动的启动命令名称</li>
+</ul>
+<h4 id="显示帮助信息："><a href="#显示帮助信息：" class="headerlink" title="显示帮助信息："></a>显示帮助信息：</h4><table>
+<thead>
+<tr>
+<th style="text-align:center">对应按键</th>
+<th style="text-align:center">介绍</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">h、？、F1</td>
+<td style="text-align:center">查看htop使用说明</td>
+</tr>
+<tr>
+<td style="text-align:center">S、F2</td>
+<td style="text-align:center">htop设定</td>
+</tr>
+<tr>
+<td style="text-align:center">/、F3</td>
+<td style="text-align:center">搜索进程</td>
+</tr>
+<tr>
+<td style="text-align:center">\、F4</td>
+<td style="text-align:center">增量进程过滤器</td>
+</tr>
+<tr>
+<td style="text-align:center">t、F5</td>
+<td style="text-align:center">显示树形结构</td>
+</tr>
+<tr>
+<td style="text-align:center">&lt;、&gt;、F6</td>
+<td style="text-align:center">选择排序方式</td>
+</tr>
+<tr>
+<td style="text-align:center">[、F7</td>
+<td style="text-align:center">可减少nice值可以提高对应进程的优先级</td>
+</tr>
+<tr>
+<td style="text-align:center">]、F8</td>
+<td style="text-align:center">可增加nice值，降低对应进程的优先级</td>
+</tr>
+<tr>
+<td style="text-align:center">k、F9</td>
+<td style="text-align:center">可对进程传递信号</td>
+</tr>
+<tr>
+<td style="text-align:center">q、F10</td>
+<td style="text-align:center">结束htop</td>
+</tr>
+<tr>
+<td style="text-align:center">u</td>
+<td style="text-align:center">只显示一个给定用户的过程</td>
+</tr>
+<tr>
+<td style="text-align:center">U</td>
+<td style="text-align:center">取消标记所有的进程</td>
+</tr>
+</tbody>
+</table>
+<h3 id="1-查看帮助：F1"><a href="#1-查看帮助：F1" class="headerlink" title="1:查看帮助：F1"></a>1:查看帮助：F1</h3><p><img src="http://otjfxmx8m.bkt.clouddn.com/F2C239AE-EF6E-4BB9-909F-9471F54F73A6.png" alt="image"></p>
+<h4 id="图中有的参数在上方表格已经解释过了，可以对照看。"><a href="#图中有的参数在上方表格已经解释过了，可以对照看。" class="headerlink" title="图中有的参数在上方表格已经解释过了，可以对照看。"></a>图中有的参数在上方表格已经解释过了，可以对照看。</h4><h3 id="2-htop的设定：F2"><a href="#2-htop的设定：F2" class="headerlink" title="2:htop的设定：F2"></a>2:htop的设定：F2</h3><h4 id="这里我就设置个颜色，别的就不截图了，请大家自行琢磨"><a href="#这里我就设置个颜色，别的就不截图了，请大家自行琢磨" class="headerlink" title="这里我就设置个颜色，别的就不截图了，请大家自行琢磨"></a>这里我就设置个颜色，别的就不截图了，请大家自行琢磨</h4><h2 id="设置前"><a href="#设置前" class="headerlink" title="设置前"></a>设置前</h2><p><img src="http://otjfxmx8m.bkt.clouddn.com/4D5484CF-E102-4AB3-955E-560D3E2567D7.png" alt="image"></p>
+<h2 id="设置后"><a href="#设置后" class="headerlink" title="设置后"></a>设置后</h2><p><img src="http://otjfxmx8m.bkt.clouddn.com/DA3C266A-7F06-4D9D-B463-B9B83773C784.png" alt="image"></p>
+<h3 id="3-搜索进程：F3"><a href="#3-搜索进程：F3" class="headerlink" title="3:搜索进程：F3"></a>3:搜索进程：F3</h3><h5 id="在界面下按F3或直接输入”-”就可以直接进入搜索模式，是按照进程名进行搜索的"><a href="#在界面下按F3或直接输入”-”就可以直接进入搜索模式，是按照进程名进行搜索的" class="headerlink" title="在界面下按F3或直接输入”/”就可以直接进入搜索模式，是按照进程名进行搜索的"></a>在界面下按F3或直接输入”/”就可以直接进入搜索模式，是按照进程名进行搜索的</h5><h5 id="搜索到的进程会用设定的颜色标记出来，方便查看"><a href="#搜索到的进程会用设定的颜色标记出来，方便查看" class="headerlink" title="搜索到的进程会用设定的颜色标记出来，方便查看"></a>搜索到的进程会用设定的颜色标记出来，方便查看</h5><p><img src="http://otjfxmx8m.bkt.clouddn.com/6FDCDD85-1CDF-461D-B449-7BC4573D1585.png" alt="iamge"></p>
+<h3 id="4-过滤器-F4"><a href="#4-过滤器-F4" class="headerlink" title="4:过滤器:F4"></a>4:过滤器:F4</h3><h5 id="相当于模糊查找，不区分大小写，下方输入要搜索的内容后，则界面只显示搜索到的内容，更加方便查看"><a href="#相当于模糊查找，不区分大小写，下方输入要搜索的内容后，则界面只显示搜索到的内容，更加方便查看" class="headerlink" title="相当于模糊查找，不区分大小写，下方输入要搜索的内容后，则界面只显示搜索到的内容，更加方便查看"></a>相当于模糊查找，不区分大小写，下方输入要搜索的内容后，则界面只显示搜索到的内容，更加方便查看</h5><p><img src="http://otjfxmx8m.bkt.clouddn.com/FE8088ED-651A-4BFB-90C3-F8EABD048BB1.png" alt="image"></p>
+<h3 id="5-以树形方式显示：F5"><a href="#5-以树形方式显示：F5" class="headerlink" title="5:以树形方式显示：F5"></a>5:以树形方式显示：F5</h3><h5 id="没按之前"><a href="#没按之前" class="headerlink" title="没按之前"></a>没按之前</h5><p><img src="http://otjfxmx8m.bkt.clouddn.com/D3434573-01AF-40FB-98CB-AB4AC42E5A02.png" alt="image"></p>
+<h5 id="按了F5之后"><a href="#按了F5之后" class="headerlink" title="按了F5之后"></a>按了F5之后</h5><p><img src="http://otjfxmx8m.bkt.clouddn.com/0394EE36-3F54-44C7-9F1F-CE3A59E58209.png" alt="image"></p>
+<h3 id="6-排序方式：F6"><a href="#6-排序方式：F6" class="headerlink" title="6:排序方式：F6"></a>6:排序方式：F6</h3><h4 id="注意：如果当前模式是在“以树状模式-F5-显示按F6没用”"><a href="#注意：如果当前模式是在“以树状模式-F5-显示按F6没用”" class="headerlink" title="注意：如果当前模式是在“以树状模式(F5)显示按F6没用”"></a>注意：如果当前模式是在“以树状模式(F5)显示按F6没用”</h4><p><img src="http://otjfxmx8m.bkt.clouddn.com/85201D0D-7C7F-40B0-8941-524815503D4A.png" alt="image"></p>
+<h3 id="7-调整进程的优先级-nice-F7和F8"><a href="#7-调整进程的优先级-nice-F7和F8" class="headerlink" title="7:调整进程的优先级(nice),F7和F8"></a>7:调整进程的优先级(nice),F7和F8</h3><h5 id="F7表示减小nice值-增大优先级-F8增大nice值-减小优先级-，选择某一进程，按F7或F8来增大或减小nice值，nice值范围为-20-19-值越小优先级越高"><a href="#F7表示减小nice值-增大优先级-F8增大nice值-减小优先级-，选择某一进程，按F7或F8来增大或减小nice值，nice值范围为-20-19-值越小优先级越高" class="headerlink" title="F7表示减小nice值(增大优先级),F8增大nice值(减小优先级)，选择某一进程，按F7或F8来增大或减小nice值，nice值范围为-20-19,值越小优先级越高"></a>F7表示减小nice值(增大优先级),F8增大nice值(减小优先级)，选择某一进程，按F7或F8来增大或减小nice值，nice值范围为-20-19,值越小优先级越高</h5><p><img src="http://otjfxmx8m.bkt.clouddn.com/83CDB1D6-C0CA-49D2-A1CD-E2ECC746C857.png" alt="image"></p>
+<h3 id="7-杀死进程：F9"><a href="#7-杀死进程：F9" class="headerlink" title="7:杀死进程：F9"></a>7:杀死进程：F9</h3><h5 id="选择某一进程按F9即可杀死此进程，很方便"><a href="#选择某一进程按F9即可杀死此进程，很方便" class="headerlink" title="选择某一进程按F9即可杀死此进程，很方便"></a>选择某一进程按F9即可杀死此进程，很方便</h5><h3 id="8-退出htop-F10"><a href="#8-退出htop-F10" class="headerlink" title="8:退出htop:F10"></a>8:退出htop:F10</h3>]]></content>
+      
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[hello]]></title>
+      <url>/2017/07/20/hello/</url>
+      <content type="html"><![CDATA[<p><img src="http://upload-images.jianshu.io/upload_images/6981908-decbae9452e3ae3c.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="yyc"></p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> hello </tag>
+            
+        </tags>
+        
+    </entry>
+    
+  
+  
+</search>

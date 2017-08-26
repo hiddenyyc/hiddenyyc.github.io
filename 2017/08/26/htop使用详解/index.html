@@ -1,0 +1,1067 @@
+<!-- 
+     _                       
+ ___| |__   __ _  ___  _   _ 
+|_  / '_ \ / _` |/ _ \| | | |
+ / /| | | | (_| | (_) | |_| |
+/___|_| |_|\__,_|\___/ \__, |
+                       |___/  
+  勤有功，戏无益。戒之哉，宜勉力。--- 喝了这碗鸡汤还有3碗
+  做一个好前端真的好难   (╯‵□′)╯ ︵┻━┻ 
+-->
+<!doctype html>
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="YYC, NexT" />
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/cat.ico?v=5.0.1" />
+
+
+
+
+<meta name="description" content="htop使用详解一.Htop使用简介大家可能对top监控软件比较熟悉，今天我为大家介绍另外一个监控软件Htop，姑且称之为top的增强版，相比top其有着很多自身的优势。如下： 两者相比起来，top比较繁琐 默认支持图形界面的鼠标操作 可以横向或纵向滚动浏览进程列表，以便看到所有的进程和完整的命令行 杀进程时不需要输入进程号等  二.安装Htop(操作环境：CentOS 7.3(64位))注意因为">
+<meta property="og:type" content="article">
+<meta property="og:title" content="htop使用详解">
+<meta property="og:url" content="http://blog.yyclinux.com/2017/08/26/htop使用详解/index.html">
+<meta property="og:site_name" content="YycLinux">
+<meta property="og:description" content="htop使用详解一.Htop使用简介大家可能对top监控软件比较熟悉，今天我为大家介绍另外一个监控软件Htop，姑且称之为top的增强版，相比top其有着很多自身的优势。如下： 两者相比起来，top比较繁琐 默认支持图形界面的鼠标操作 可以横向或纵向滚动浏览进程列表，以便看到所有的进程和完整的命令行 杀进程时不需要输入进程号等  二.安装Htop(操作环境：CentOS 7.3(64位))注意因为">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://otjfxmx8m.bkt.clouddn.com/B72FAC7D-9223-487E-A50E-BE673929BA8F.png">
+<meta property="og:image" content="http://otjfxmx8m.bkt.clouddn.com/E6F802A1-903E-47E8-AE4A-3C5BA77CC61B.png">
+<meta property="og:image" content="http://otjfxmx8m.bkt.clouddn.com/F2C239AE-EF6E-4BB9-909F-9471F54F73A6.png">
+<meta property="og:image" content="http://otjfxmx8m.bkt.clouddn.com/4D5484CF-E102-4AB3-955E-560D3E2567D7.png">
+<meta property="og:image" content="http://otjfxmx8m.bkt.clouddn.com/DA3C266A-7F06-4D9D-B463-B9B83773C784.png">
+<meta property="og:image" content="http://otjfxmx8m.bkt.clouddn.com/6FDCDD85-1CDF-461D-B449-7BC4573D1585.png">
+<meta property="og:image" content="http://otjfxmx8m.bkt.clouddn.com/FE8088ED-651A-4BFB-90C3-F8EABD048BB1.png">
+<meta property="og:image" content="http://otjfxmx8m.bkt.clouddn.com/D3434573-01AF-40FB-98CB-AB4AC42E5A02.png">
+<meta property="og:image" content="http://otjfxmx8m.bkt.clouddn.com/0394EE36-3F54-44C7-9F1F-CE3A59E58209.png">
+<meta property="og:image" content="http://otjfxmx8m.bkt.clouddn.com/85201D0D-7C7F-40B0-8941-524815503D4A.png">
+<meta property="og:image" content="http://otjfxmx8m.bkt.clouddn.com/83CDB1D6-C0CA-49D2-A1CD-E2ECC746C857.png">
+<meta property="og:updated_time" content="2017-08-26T08:40:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="htop使用详解">
+<meta name="twitter:description" content="htop使用详解一.Htop使用简介大家可能对top监控软件比较熟悉，今天我为大家介绍另外一个监控软件Htop，姑且称之为top的增强版，相比top其有着很多自身的优势。如下： 两者相比起来，top比较繁琐 默认支持图形界面的鼠标操作 可以横向或纵向滚动浏览进程列表，以便看到所有的进程和完整的命令行 杀进程时不需要输入进程号等  二.安装Htop(操作环境：CentOS 7.3(64位))注意因为">
+<meta name="twitter:image" content="http://otjfxmx8m.bkt.clouddn.com/B72FAC7D-9223-487E-A50E-BE673929BA8F.png">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: false,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: '(╯‵□′)╯'
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blog.yyclinux.com/2017/08/26/htop使用详解/"/>
+
+  <title> htop使用详解 | YycLinux </title>
+  
+  <meta name="baidu-site-verification" content="k0UgqisIfE" />
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  <!--[if lte IE 9]>
+  <script src="http://cdn.bootcss.com/html5shiv/r29/html5.min.js"></script>
+  <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'> <a href="http://www.goody.com.cn/2014/updatebrowser/"><img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820" alt="
+ 您正在使用的ie浏览器版本过低，为了保障您的访问安全，以及更友好的浏览体验，强烈建议您升级最新的浏览器。" style='margin-left:auto;margin-right:auto;display: block;'/></a></div> 
+  <![endif]-->
+  
+  
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?672e23e6a7cfc50fb1a00e13b7789303";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+  
+  
+  
+
+
+	
+	<canvas id="yyx"></canvas>
+	<script>
+		(function(){
+		    // document.addEventListener('touchmove', function(e) {
+		    //     e.preventDefault()
+		    // })
+		    var c = document.getElementById('yyx'),
+		        x = c.getContext('2d'),
+		        pr = window.devicePixelRatio || 1,
+		        w = window.innerWidth,
+		        h = window.innerHeight,
+		        f = 90,
+		        q,
+		        m = Math,
+		        r = 0,
+		        u = m.PI * 2,
+		        v = m.cos,
+		        z = m.random
+		    c.width = w * pr
+		    c.height = h * pr
+		    x.scale(pr, pr)
+		    x.globalAlpha = 0.6
+		    c.style.cssText ='position: fixed;top: 0;left: 0;z-index: 0;width: 100%;height: 100%;pointer-events: none;';
+		    function i() {
+		        x.clearRect(0, 0, w, h)
+		        q = [{
+		            x: 0,
+		            y: h * .7 + f
+		        }, {
+		            x: 0,
+		            y: h * .7 - f
+		        }]
+		        while (q[1].x < w + f) d(q[0], q[1])
+		    }
+
+		    function d(i, j) {
+		        x.beginPath()
+		        x.moveTo(i.x, i.y)
+		        x.lineTo(j.x, j.y)
+		        var k = j.x + (z() * 2 - 0.25) * f,
+		            n = y(j.y)
+		        x.lineTo(k, n)
+		        x.closePath()
+		        r -= u / -50
+		        x.fillStyle = '#' + (v(r) * 127 + 128 << 16 | v(r + u / 3) * 127 + 128 << 8 | v(r + u / 3 * 2) * 127 + 128).toString(16)
+		        x.fill()
+		        q[0] = q[1]
+		        q[1] = {
+		            x: k,
+		            y: n
+		        }
+		    }
+
+		    function y(p) {
+		        var t = p + (z() * 2 - 1.1) * f
+		        return (t > h || t < 0) ? y(p) : t
+		    }
+		    document.onclick = i
+		    document.ontouchstart = i
+		    i()
+		})();  
+	        
+	</script>
+
+
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">YycLinux</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            按分类找
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于我
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            按标签找
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜一下
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                htop使用详解
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-08-26T16:39:12+08:00" content="2017-08-26">
+              2017-08-26
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/08/26/htop使用详解/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/08/26/htop使用详解/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+              &nbsp; | &nbsp;
+              <span class="page-pv"><i class="fa fa-file-o"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="htop使用详解"><a href="#htop使用详解" class="headerlink" title="htop使用详解"></a><center>htop使用详解</center></h3><h3 id="一-Htop使用简介"><a href="#一-Htop使用简介" class="headerlink" title="一.Htop使用简介"></a>一.Htop使用简介</h3><h3 id="大家可能对top监控软件比较熟悉，今天我为大家介绍另外一个监控软件Htop，姑且称之为top的增强版，相比top其有着很多自身的优势。如下："><a href="#大家可能对top监控软件比较熟悉，今天我为大家介绍另外一个监控软件Htop，姑且称之为top的增强版，相比top其有着很多自身的优势。如下：" class="headerlink" title="大家可能对top监控软件比较熟悉，今天我为大家介绍另外一个监控软件Htop，姑且称之为top的增强版，相比top其有着很多自身的优势。如下："></a>大家可能对top监控软件比较熟悉，今天我为大家介绍另外一个监控软件Htop，姑且称之为top的增强版，相比top其有着很多自身的优势。如下：</h3><ul>
+<li>两者相比起来，top比较繁琐</li>
+<li>默认支持图形界面的鼠标操作</li>
+<li>可以横向或纵向滚动浏览进程列表，以便看到所有的进程和完整的命令行</li>
+<li>杀进程时不需要输入进程号等</li>
+</ul>
+<h3 id="二-安装Htop-操作环境：CentOS-7-3-64位"><a href="#二-安装Htop-操作环境：CentOS-7-3-64位" class="headerlink" title="二.安装Htop(操作环境：CentOS 7.3(64位))"></a>二.安装Htop(操作环境：CentOS 7.3(64位))</h3><h5 id="注意因为改了yum源，base源没有htop包，得添加个epel源-以下是我yum源配置信息"><a href="#注意因为改了yum源，base源没有htop包，得添加个epel源-以下是我yum源配置信息" class="headerlink" title="注意因为改了yum源，base源没有htop包，得添加个epel源,以下是我yum源配置信息"></a>注意因为改了yum源，base源没有htop包，得添加个epel源,以下是我yum源配置信息</h5><pre><code class="bash">vim /etc/yum.repos.d/yyc.repo
+[yyc]
+name=yyc
+baseurl=http://xxx.xxx.xxx.xxx/centos/7
+gpgcheck=0
+
+[epe]
+name=epe
+baseurl=http://xxx.xxx.xxx.xxx/fedora-epel/7/x86_64/
+gpgcheck=0
+</code></pre>
+<h5 id="安装："><a href="#安装：" class="headerlink" title="安装："></a>安装：</h5><pre><code class="bash">[ root@localhost ~ ]#yum -y install htop
+</code></pre>
+<p><img src="http://otjfxmx8m.bkt.clouddn.com/B72FAC7D-9223-487E-A50E-BE673929BA8F.png" alt="image"></p>
+<h4 id="图上最左上方分别为：cpu、内存、交换分区的使用情况，最右上角分别为：Tasks为进程总数，当前运行的进程数、Load-average为系统1分钟、5分钟、10分钟的平均负载情况、Uptime为系统的运行时间"><a href="#图上最左上方分别为：cpu、内存、交换分区的使用情况，最右上角分别为：Tasks为进程总数，当前运行的进程数、Load-average为系统1分钟、5分钟、10分钟的平均负载情况、Uptime为系统的运行时间" class="headerlink" title="图上最左上方分别为：cpu、内存、交换分区的使用情况，最右上角分别为：Tasks为进程总数，当前运行的进程数、Load average为系统1分钟、5分钟、10分钟的平均负载情况、Uptime为系统的运行时间"></a>图上最左上方分别为：cpu、内存、交换分区的使用情况，最右上角分别为：Tasks为进程总数，当前运行的进程数、Load average为系统1分钟、5分钟、10分钟的平均负载情况、Uptime为系统的运行时间</h4><p><img src="http://otjfxmx8m.bkt.clouddn.com/E6F802A1-903E-47E8-AE4A-3C5BA77CC61B.png" alt="image"></p>
+<h5 id="图中选项："><a href="#图中选项：" class="headerlink" title="图中选项："></a>图中选项：</h5><ul>
+<li>PID：进行的标识号</li>
+<li>USER：运行此进程的用户</li>
+<li>PRI：进程的优先级</li>
+<li>NI：进程的优先级别值，默认的为0，可以进行调整</li>
+<li>VIRT：进程占用的虚拟内存值</li>
+<li>RES：进程占用的物理内存值</li>
+<li>SHR：进程占用的共享内存值</li>
+<li>S：进程的运行状况，R表示正在运行、S表示休眠，等待唤醒、Z表示僵死状态</li>
+<li>%CPU：该进程占用的CPU使用率</li>
+<li>%MEM：该进程占用的物理内存和总内存的百分比</li>
+<li>TIME+：该进程启动后占用的总的CPU时间</li>
+<li>COMMAND：进程启动的启动命令名称</li>
+</ul>
+<h4 id="显示帮助信息："><a href="#显示帮助信息：" class="headerlink" title="显示帮助信息："></a>显示帮助信息：</h4><table>
+<thead>
+<tr>
+<th style="text-align:center">对应按键</th>
+<th style="text-align:center">介绍</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">h、？、F1</td>
+<td style="text-align:center">查看htop使用说明</td>
+</tr>
+<tr>
+<td style="text-align:center">S、F2</td>
+<td style="text-align:center">htop设定</td>
+</tr>
+<tr>
+<td style="text-align:center">/、F3</td>
+<td style="text-align:center">搜索进程</td>
+</tr>
+<tr>
+<td style="text-align:center">\、F4</td>
+<td style="text-align:center">增量进程过滤器</td>
+</tr>
+<tr>
+<td style="text-align:center">t、F5</td>
+<td style="text-align:center">显示树形结构</td>
+</tr>
+<tr>
+<td style="text-align:center">&lt;、&gt;、F6</td>
+<td style="text-align:center">选择排序方式</td>
+</tr>
+<tr>
+<td style="text-align:center">[、F7</td>
+<td style="text-align:center">可减少nice值可以提高对应进程的优先级</td>
+</tr>
+<tr>
+<td style="text-align:center">]、F8</td>
+<td style="text-align:center">可增加nice值，降低对应进程的优先级</td>
+</tr>
+<tr>
+<td style="text-align:center">k、F9</td>
+<td style="text-align:center">可对进程传递信号</td>
+</tr>
+<tr>
+<td style="text-align:center">q、F10</td>
+<td style="text-align:center">结束htop</td>
+</tr>
+<tr>
+<td style="text-align:center">u</td>
+<td style="text-align:center">只显示一个给定用户的过程</td>
+</tr>
+<tr>
+<td style="text-align:center">U</td>
+<td style="text-align:center">取消标记所有的进程</td>
+</tr>
+</tbody>
+</table>
+<h3 id="1-查看帮助：F1"><a href="#1-查看帮助：F1" class="headerlink" title="1:查看帮助：F1"></a>1:查看帮助：F1</h3><p><img src="http://otjfxmx8m.bkt.clouddn.com/F2C239AE-EF6E-4BB9-909F-9471F54F73A6.png" alt="image"></p>
+<h4 id="图中有的参数在上方表格已经解释过了，可以对照看。"><a href="#图中有的参数在上方表格已经解释过了，可以对照看。" class="headerlink" title="图中有的参数在上方表格已经解释过了，可以对照看。"></a>图中有的参数在上方表格已经解释过了，可以对照看。</h4><h3 id="2-htop的设定：F2"><a href="#2-htop的设定：F2" class="headerlink" title="2:htop的设定：F2"></a>2:htop的设定：F2</h3><h4 id="这里我就设置个颜色，别的就不截图了，请大家自行琢磨"><a href="#这里我就设置个颜色，别的就不截图了，请大家自行琢磨" class="headerlink" title="这里我就设置个颜色，别的就不截图了，请大家自行琢磨"></a>这里我就设置个颜色，别的就不截图了，请大家自行琢磨</h4><h2 id="设置前"><a href="#设置前" class="headerlink" title="设置前"></a>设置前</h2><p><img src="http://otjfxmx8m.bkt.clouddn.com/4D5484CF-E102-4AB3-955E-560D3E2567D7.png" alt="image"></p>
+<h2 id="设置后"><a href="#设置后" class="headerlink" title="设置后"></a>设置后</h2><p><img src="http://otjfxmx8m.bkt.clouddn.com/DA3C266A-7F06-4D9D-B463-B9B83773C784.png" alt="image"></p>
+<h3 id="3-搜索进程：F3"><a href="#3-搜索进程：F3" class="headerlink" title="3:搜索进程：F3"></a>3:搜索进程：F3</h3><h5 id="在界面下按F3或直接输入”-”就可以直接进入搜索模式，是按照进程名进行搜索的"><a href="#在界面下按F3或直接输入”-”就可以直接进入搜索模式，是按照进程名进行搜索的" class="headerlink" title="在界面下按F3或直接输入”/”就可以直接进入搜索模式，是按照进程名进行搜索的"></a>在界面下按F3或直接输入”/”就可以直接进入搜索模式，是按照进程名进行搜索的</h5><h5 id="搜索到的进程会用设定的颜色标记出来，方便查看"><a href="#搜索到的进程会用设定的颜色标记出来，方便查看" class="headerlink" title="搜索到的进程会用设定的颜色标记出来，方便查看"></a>搜索到的进程会用设定的颜色标记出来，方便查看</h5><p><img src="http://otjfxmx8m.bkt.clouddn.com/6FDCDD85-1CDF-461D-B449-7BC4573D1585.png" alt="iamge"></p>
+<h3 id="4-过滤器-F4"><a href="#4-过滤器-F4" class="headerlink" title="4:过滤器:F4"></a>4:过滤器:F4</h3><h5 id="相当于模糊查找，不区分大小写，下方输入要搜索的内容后，则界面只显示搜索到的内容，更加方便查看"><a href="#相当于模糊查找，不区分大小写，下方输入要搜索的内容后，则界面只显示搜索到的内容，更加方便查看" class="headerlink" title="相当于模糊查找，不区分大小写，下方输入要搜索的内容后，则界面只显示搜索到的内容，更加方便查看"></a>相当于模糊查找，不区分大小写，下方输入要搜索的内容后，则界面只显示搜索到的内容，更加方便查看</h5><p><img src="http://otjfxmx8m.bkt.clouddn.com/FE8088ED-651A-4BFB-90C3-F8EABD048BB1.png" alt="image"></p>
+<h3 id="5-以树形方式显示：F5"><a href="#5-以树形方式显示：F5" class="headerlink" title="5:以树形方式显示：F5"></a>5:以树形方式显示：F5</h3><h5 id="没按之前"><a href="#没按之前" class="headerlink" title="没按之前"></a>没按之前</h5><p><img src="http://otjfxmx8m.bkt.clouddn.com/D3434573-01AF-40FB-98CB-AB4AC42E5A02.png" alt="image"></p>
+<h5 id="按了F5之后"><a href="#按了F5之后" class="headerlink" title="按了F5之后"></a>按了F5之后</h5><p><img src="http://otjfxmx8m.bkt.clouddn.com/0394EE36-3F54-44C7-9F1F-CE3A59E58209.png" alt="image"></p>
+<h3 id="6-排序方式：F6"><a href="#6-排序方式：F6" class="headerlink" title="6:排序方式：F6"></a>6:排序方式：F6</h3><h4 id="注意：如果当前模式是在“以树状模式-F5-显示按F6没用”"><a href="#注意：如果当前模式是在“以树状模式-F5-显示按F6没用”" class="headerlink" title="注意：如果当前模式是在“以树状模式(F5)显示按F6没用”"></a>注意：如果当前模式是在“以树状模式(F5)显示按F6没用”</h4><p><img src="http://otjfxmx8m.bkt.clouddn.com/85201D0D-7C7F-40B0-8941-524815503D4A.png" alt="image"></p>
+<h3 id="7-调整进程的优先级-nice-F7和F8"><a href="#7-调整进程的优先级-nice-F7和F8" class="headerlink" title="7:调整进程的优先级(nice),F7和F8"></a>7:调整进程的优先级(nice),F7和F8</h3><h5 id="F7表示减小nice值-增大优先级-F8增大nice值-减小优先级-，选择某一进程，按F7或F8来增大或减小nice值，nice值范围为-20-19-值越小优先级越高"><a href="#F7表示减小nice值-增大优先级-F8增大nice值-减小优先级-，选择某一进程，按F7或F8来增大或减小nice值，nice值范围为-20-19-值越小优先级越高" class="headerlink" title="F7表示减小nice值(增大优先级),F8增大nice值(减小优先级)，选择某一进程，按F7或F8来增大或减小nice值，nice值范围为-20-19,值越小优先级越高"></a>F7表示减小nice值(增大优先级),F8增大nice值(减小优先级)，选择某一进程，按F7或F8来增大或减小nice值，nice值范围为-20-19,值越小优先级越高</h5><p><img src="http://otjfxmx8m.bkt.clouddn.com/83CDB1D6-C0CA-49D2-A1CD-E2ECC746C857.png" alt="image"></p>
+<h3 id="7-杀死进程：F9"><a href="#7-杀死进程：F9" class="headerlink" title="7:杀死进程：F9"></a>7:杀死进程：F9</h3><h5 id="选择某一进程按F9即可杀死此进程，很方便"><a href="#选择某一进程按F9即可杀死此进程，很方便" class="headerlink" title="选择某一进程按F9即可杀死此进程，很方便"></a>选择某一进程按F9即可杀死此进程，很方便</h5><h3 id="8-退出htop-F10"><a href="#8-退出htop-F10" class="headerlink" title="8:退出htop:F10"></a>8:退出htop:F10</h3>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/20/hello/" rel="next" title="hello">
+                <i class="fa fa-chevron-left"></i> hello
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+
+
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2017/08/26/htop使用详解/"
+     data-title="htop使用详解"
+     data-content=""
+     data-url="http://blog.yyclinux.com/2017/08/26/htop使用详解/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/08/26/htop使用详解/"
+           data-title="htop使用详解" data-url="http://blog.yyclinux.com/2017/08/26/htop使用详解/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars2.githubusercontent.com/u/28626378?v=4&s=460"
+               alt="顽媃啊" />
+          <p class="site-author-name" itemprop="name">顽媃啊</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/hiddenyyc" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://wpa.qq.com/msgrd?v=3&uin=1218172654&site=qq&menu=yes" target="_blank" title="QQ">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  QQ
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友链
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.wangbinzhou.com" title="BinZhou.W" target="_blank">BinZhou.W</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.at23.net" title="WeiDong.Z" target="_blank">WeiDong.Z</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#htop使用详解"><span class="nav-number">1.</span> <span class="nav-text">htop使用详解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一-Htop使用简介"><span class="nav-number">2.</span> <span class="nav-text">一.Htop使用简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#大家可能对top监控软件比较熟悉，今天我为大家介绍另外一个监控软件Htop，姑且称之为top的增强版，相比top其有着很多自身的优势。如下："><span class="nav-number">3.</span> <span class="nav-text">大家可能对top监控软件比较熟悉，今天我为大家介绍另外一个监控软件Htop，姑且称之为top的增强版，相比top其有着很多自身的优势。如下：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-安装Htop-操作环境：CentOS-7-3-64位"><span class="nav-number">4.</span> <span class="nav-text">二.安装Htop(操作环境：CentOS 7.3(64位))</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#注意因为改了yum源，base源没有htop包，得添加个epel源-以下是我yum源配置信息"><span class="nav-number">4.0.1.</span> <span class="nav-text">注意因为改了yum源，base源没有htop包，得添加个epel源,以下是我yum源配置信息</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#安装："><span class="nav-number">4.0.2.</span> <span class="nav-text">安装：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#图上最左上方分别为：cpu、内存、交换分区的使用情况，最右上角分别为：Tasks为进程总数，当前运行的进程数、Load-average为系统1分钟、5分钟、10分钟的平均负载情况、Uptime为系统的运行时间"><span class="nav-number">4.1.</span> <span class="nav-text">图上最左上方分别为：cpu、内存、交换分区的使用情况，最右上角分别为：Tasks为进程总数，当前运行的进程数、Load average为系统1分钟、5分钟、10分钟的平均负载情况、Uptime为系统的运行时间</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#图中选项："><span class="nav-number">4.1.1.</span> <span class="nav-text">图中选项：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#显示帮助信息："><span class="nav-number">4.2.</span> <span class="nav-text">显示帮助信息：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-查看帮助：F1"><span class="nav-number">5.</span> <span class="nav-text">1:查看帮助：F1</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#图中有的参数在上方表格已经解释过了，可以对照看。"><span class="nav-number">5.1.</span> <span class="nav-text">图中有的参数在上方表格已经解释过了，可以对照看。</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-htop的设定：F2"><span class="nav-number">6.</span> <span class="nav-text">2:htop的设定：F2</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#这里我就设置个颜色，别的就不截图了，请大家自行琢磨"><span class="nav-number">6.1.</span> <span class="nav-text">这里我就设置个颜色，别的就不截图了，请大家自行琢磨</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置前"><span class="nav-number"></span> <span class="nav-text">设置前</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置后"><span class="nav-number"></span> <span class="nav-text">设置后</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-搜索进程：F3"><span class="nav-number">1.</span> <span class="nav-text">3:搜索进程：F3</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#在界面下按F3或直接输入”-”就可以直接进入搜索模式，是按照进程名进行搜索的"><span class="nav-number">1.0.1.</span> <span class="nav-text">在界面下按F3或直接输入”/”就可以直接进入搜索模式，是按照进程名进行搜索的</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#搜索到的进程会用设定的颜色标记出来，方便查看"><span class="nav-number">1.0.2.</span> <span class="nav-text">搜索到的进程会用设定的颜色标记出来，方便查看</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-过滤器-F4"><span class="nav-number">2.</span> <span class="nav-text">4:过滤器:F4</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#相当于模糊查找，不区分大小写，下方输入要搜索的内容后，则界面只显示搜索到的内容，更加方便查看"><span class="nav-number">2.0.1.</span> <span class="nav-text">相当于模糊查找，不区分大小写，下方输入要搜索的内容后，则界面只显示搜索到的内容，更加方便查看</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-以树形方式显示：F5"><span class="nav-number">3.</span> <span class="nav-text">5:以树形方式显示：F5</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#没按之前"><span class="nav-number">3.0.1.</span> <span class="nav-text">没按之前</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#按了F5之后"><span class="nav-number">3.0.2.</span> <span class="nav-text">按了F5之后</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-排序方式：F6"><span class="nav-number">4.</span> <span class="nav-text">6:排序方式：F6</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#注意：如果当前模式是在“以树状模式-F5-显示按F6没用”"><span class="nav-number">4.1.</span> <span class="nav-text">注意：如果当前模式是在“以树状模式(F5)显示按F6没用”</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-调整进程的优先级-nice-F7和F8"><span class="nav-number">5.</span> <span class="nav-text">7:调整进程的优先级(nice),F7和F8</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#F7表示减小nice值-增大优先级-F8增大nice值-减小优先级-，选择某一进程，按F7或F8来增大或减小nice值，nice值范围为-20-19-值越小优先级越高"><span class="nav-number">5.0.1.</span> <span class="nav-text">F7表示减小nice值(增大优先级),F8增大nice值(减小优先级)，选择某一进程，按F7或F8来增大或减小nice值，nice值范围为-20-19,值越小优先级越高</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-杀死进程：F9"><span class="nav-number">6.</span> <span class="nav-text">7:杀死进程：F9</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#选择某一进程按F9即可杀死此进程，很方便"><span class="nav-number">6.0.1.</span> <span class="nav-text">选择某一进程按F9即可杀死此进程，很方便</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-退出htop-F10"><span class="nav-number">7.</span> <span class="nav-text">8:退出htop:F10</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    
+    <i class="menu-item-icon fa fa-fw fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">顽媃啊</span>
+</div>
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+<div class="theme-info">
+ 
+  Theme by <a class="theme-link" href="https://github.com/hiddenyyc">YYC</a> or
+  
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">Next</a>
+</div>
+
+
+
+
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-pv">访问量：<i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+
+<div class="includejs">
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+  
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"zhaoy875"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+
+<div class="popoverlay" style="display:none"></div>
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+// 修改 弹窗时造成网站右边侧栏消失和出现时的背景页面布局重绘的抖动 
+    function proceedsearch() {
+        // 作者这里标签忘记闭合了？
+      // $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+
+      // 将上一行dom操作改为css操作 .popoverlay遮罩层样式在localsearch.styl中
+      $(".popoverlay").fadeIn('fast');
+      $('.popup').toggle();
+      //toggle方法jq从1.9版本删除了?
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;搜一下按钮点击弹窗
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    // 关闭搜索
+    $('.popup-btn-close').click(function(e){
+        // 此处修改为fade渐隐而不是show hide
+      $('.popup').fadeOut('fast');
+      // 将此处的dom操作改为样式操作
+      // $(".popoverlay").remove();
+      $(".popoverlay").fadeOut();
+
+      // 修改 弹窗时造成网站右边侧栏消失和出现时的背景页面布局重绘的抖动 
+      // $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+  
+  
+  
+    <script type="text/javascript" src="/js/zhaoy.js"></script> 
+  
+  
+</div>
+</body>
+</html>
